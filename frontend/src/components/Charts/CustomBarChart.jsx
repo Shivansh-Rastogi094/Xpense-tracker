@@ -10,7 +10,7 @@ import {
   Cell,
 } from "recharts";
 
-const CustomBarChart = ({ data }) => {
+const CustomBarChart = ({ data = [] }) => {
   const getBarColor = (index) =>
     index % 2 === 0 ? "#875cf5" : "#cfbefb";
 
@@ -49,13 +49,11 @@ const CustomBarChart = ({ data }) => {
           />
           <Tooltip content={<CustomTooltip />} />
 
-          <Bar
-            dataKey="amount"
-            radius={[8, 8, 0, 0]}
-          >
-            {data.map((_, index) => (
-              <Cell key={index} fill={getBarColor(index)} />
-            ))}
+          <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
+            {Array.isArray(data) &&
+              data.map((_, index) => (
+                <Cell key={index} fill={getBarColor(index)} />
+              ))}
           </Bar>
         </BarChart>
       </ResponsiveContainer>
