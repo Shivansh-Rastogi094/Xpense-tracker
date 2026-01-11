@@ -107,7 +107,7 @@ const Home = () => {
           data={dashboardData?.last60DaysIncomes?.transactions.slice(0,4) || []}
           onSeeMore={() => navigate("/income")}
           />
-
+          {/* Comments */}
         </div>
       </div>
     </DashboardLayout>
