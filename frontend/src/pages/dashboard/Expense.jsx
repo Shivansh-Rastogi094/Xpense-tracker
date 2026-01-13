@@ -23,7 +23,7 @@ const Expense = () => {
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false)
 
    // fetch all expense details
-  const fetchExpenseDetails = async ()=> {
+const fetchExpenseDetails = async ()=> {
     if(loading)
       setLoading(true)
 
@@ -41,7 +41,7 @@ const Expense = () => {
     }
   }
   // handle add Expense 
-  const handleAddExpense = async (expense) => {
+const handleAddExpense = async (expense) => {
     const {category, amount, date, icon} = expense;
     // validation checks
     
@@ -72,9 +72,27 @@ const Expense = () => {
       )
     }
   }
+// Downaload Excel
+  const downloadExpenseDetails = async () => {
+    try {
+      const response  = await axiosInstance.get(
+        API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,{responseType:"blob"})
 
-  const downloadExpenseDetails = async () => {}
-
+        // Create URL for Blob
+        const url = window.URL.createObjectURL(new Blob([response.data]))
+        const link = document.createElement("a")
+        link.href = url;
+        link.setAttribute("download", "expense_details.xlsx");
+        document.body.appendChild(link);
+        link.click()
+        link.parentNode.removeChild(link);
+        window.URL.revokeObjectURL(url)
+    } catch (error) { 
+      console.error("Error Downloading Excel sheet",error)
+      toast.error("Failed to download expense sheet")
+    }
+  }
+//  handle Delete income
   const deleteExpense = async (id) => {
     try{
 
