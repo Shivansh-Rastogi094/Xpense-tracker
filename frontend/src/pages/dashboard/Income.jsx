@@ -8,8 +8,10 @@ import AddIncomeForm from '../../components/Income/AddIncomeForm'
 import toast from 'react-hot-toast'
 import IncomeList from '../../components/Income/IncomeList'
 import DeleteAlert from '../../components/DeleteAlert'
+import { useUserAuth } from '../../hooks/UseUserAuth'
 
 const Income = () => {
+    useUserAuth();
 
   const [incomeData, setIncomeData] = useState([])
   const [loading, setLoading] = useState(false)
@@ -21,7 +23,6 @@ const Income = () => {
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false)
 
   // fetch all income details
-
   const fetchIncomeDetails = async ()=> {
     if(loading)
       setLoading(true)
@@ -39,9 +40,7 @@ const Income = () => {
       setLoading(false)
     }
   }
-
   // handle add Income 
-
   const handleAddIncome = async (income) => {
     const {source, amount, date, icon} = income;
     // validation checks
@@ -75,9 +74,7 @@ const Income = () => {
 
     }
   }
-
   // handle delete Income
-
   const deleteIncome = async (id) => {
     try{
 
@@ -90,9 +87,7 @@ const Income = () => {
     }
 
   }
-
   // handle download income details
-
   const downloadIncomeDetails = async () => {}
 
   useEffect(() => {
