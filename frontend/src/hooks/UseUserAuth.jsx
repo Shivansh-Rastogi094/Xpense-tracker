@@ -27,7 +27,7 @@ export const useUserAuth = () => {
 
         if (isMounted) {
           clearUser()
-          navigate("/login")
+          navigate("/Login")
         }
       }
     }

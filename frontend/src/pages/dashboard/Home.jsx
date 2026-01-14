@@ -77,7 +77,7 @@ const Home = () => {
           {/* Row 1: Transactions & Overview */}
           <RecentTransaction
             transaction={dashboardData?.recentTransactions || []}
-            onSeeMore={() => navigate("/expense")}
+            onSeeMore={() => navigate("/Expense")}
           />
           <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
@@ -88,7 +88,7 @@ const Home = () => {
           {/* Row 2: Expense Data */}
           <ExpenseTransations
             transactions={dashboardData?.last30DaysExpenses?.transactions || []}
-            onSeeMore={() => navigate("/expense")}
+            onSeeMore={() => navigate("/Expense")}
           />
           <Last30DaysExpenses
             data={dashboardData?.last30DaysExpenses?.transactions || []}
@@ -101,7 +101,7 @@ const Home = () => {
           />
           <RecentIncome
             data={dashboardData?.last60DaysIncomes?.transactions.slice(0, 4) || []}
-            onSeeMore={() => navigate("/income")}
+            onSeeMore={() => navigate("/Income")}
           />
           
         </div>
