@@ -9,47 +9,34 @@ import {
   CartesianGrid,
   Cell,
 } from "recharts";
+import CustomTooltip from "../Charts/CustomTooltip"; // Ensure path is correct
 
 const CustomBarChart = ({ data = [] }) => {
+  // Toggle between Primary (Teal) and Secondary (Aqua)
   const getBarColor = (index) =>
-    index % 2 === 0 ? "#875cf5" : "#cfbefb";
-
-  const CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
-          <p className="text-xs font-semibold text-purple-800 mb-1">
-            {payload[0].payload.month}
-          </p>
-          <p className="text-sm text-gray-600">
-            Amount:{" "}
-            <span className="font-medium text-gray-900">
-              ₹{payload[0].value}
-            </span>
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
+    index % 2 === 0 ? "#006d77" : "#83c5be"; 
 
   return (
-    <div className="bg-white mt-6">
+    <div className="mt-6">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
+          
           <XAxis
             dataKey="month"
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#006d77" }} // Stormy-500
             stroke="none"
+            dy={10}
           />
+          
           <YAxis
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 12, fill: "#006d77" }} // Stormy-500
             stroke="none"
           />
-          <Tooltip content={<CustomTooltip />} />
+          
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'transparent' }} />
 
-          <Bar dataKey="amount" radius={[8, 8, 0, 0]}>
+          <Bar dataKey="amount" radius={[6, 6, 0, 0]} barSize={30}>
             {Array.isArray(data) &&
               data.map((_, index) => (
                 <Cell key={index} fill={getBarColor(index)} />

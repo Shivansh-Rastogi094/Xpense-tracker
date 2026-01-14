@@ -9,8 +9,9 @@ const AddExpenseForm = ({openAddExpense}) => {
         date: "",
         icon: "",
       })
-       const handleChange = (key, value) =>
-    setExpense({ ...expense, [key]: value })
+    
+    const handleChange = (key, value) =>
+        setExpense({ ...expense, [key]: value })
     
   return (
     <div className="space-y-6">
@@ -31,8 +32,8 @@ const AddExpenseForm = ({openAddExpense}) => {
           onChange={({ target }) =>
             handleChange("category", target.value)
           }
-          label="Expense category"
-          placeholder="Rent"
+          label="Expense Category"
+          placeholder="Rent, Groceries, etc."
           type="text"
         />
 
@@ -57,9 +58,9 @@ const AddExpenseForm = ({openAddExpense}) => {
       </div>
 
       {/* Action */}
-      <div className="flex justify-end pt-4 border-t">
+      <div className="flex justify-end pt-4 border-t border-alice-200 dark:border-stormy-400">
         <button
-          className="add-btn add-btn-fill px-6 py-2"
+          className="add-btn add-btn-fill px-6 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all"
           type="button"
           onClick={() => openAddExpense(expense)}
         >
