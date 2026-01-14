@@ -1,4 +1,4 @@
-export const BASE_URL="http://localhost:8000";
+export const BASE_URL="https://xpense-tracker-zwne.onrender.com";
 
 //utils/api_paths.js
 export const API_PATHS ={
