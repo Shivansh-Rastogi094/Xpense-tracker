@@ -18,9 +18,9 @@ import UserProvider from "./context/UserContext";
 const Root = () => {
   const isAuthenticated = !!localStorage.getItem("token");
   return isAuthenticated ? (
-    <Navigate to="/dashboard" />
+    <Navigate to="/Dashboard" />
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/Login" />
   );
 };
 
