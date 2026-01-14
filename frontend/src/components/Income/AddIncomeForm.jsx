@@ -33,7 +33,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
             handleChange("source", target.value)
           }
           label="Income Source"
-          placeholder="Salary"
+          placeholder="Salary, Freelance, etc."
           type="text"
         />
 
@@ -43,7 +43,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
             handleChange("amount", target.value)
           }
           label="Amount"
-          placeholder="₹500"
+          placeholder="₹5000"
           type="number"
         />
 
@@ -58,9 +58,9 @@ const AddIncomeForm = ({ onAddIncome }) => {
       </div>
 
       {/* Action */}
-      <div className="flex justify-end pt-4 border-t">
+      <div className="flex justify-end pt-4 border-t border-alice-200 dark:border-stormy-400">
         <button
-          className="add-btn add-btn-fill px-6 py-2"
+          className="add-btn add-btn-fill px-6 py-2.5 rounded-xl text-sm font-bold shadow-md hover:shadow-lg transition-all"
           type="button"
           onClick={() => onAddIncome(income)}
         >

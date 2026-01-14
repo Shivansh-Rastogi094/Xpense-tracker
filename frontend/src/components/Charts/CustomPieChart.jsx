@@ -7,7 +7,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import CustomTooltip from "./CustomTooltip";
+import CustomTooltip from "../Charts/CustomTooltip";
 
 const CustomPieChart = ({
   data = [],
@@ -28,18 +28,26 @@ const CustomPieChart = ({
           innerRadius={100}
           outerRadius={130}
           labelLine={false}
+          paddingAngle={5}
         >
           {data.map((_, index) => (
             <Cell
               key={`cell-${index}`}
               fill={color[index % color.length]}
+              stroke="none"
             />
           ))}
         </Pie>
 
-        <Tooltip />
-        <Legend />
-{/* content={CustomTooltip} */}
+        <Tooltip content={<CustomTooltip />} />
+        <Legend 
+            iconType="circle" 
+            layout="horizontal" 
+            verticalAlign="bottom" 
+            align="center"
+            wrapperStyle={{ paddingTop: "20px" }}
+        />
+
         {showTextAnchor && (
           <>
             <text
@@ -47,8 +55,9 @@ const CustomPieChart = ({
               y="50%"
               dy={-25}
               textAnchor="middle"
-              fill="#666"
+              fill="#83c5be" // Pearl-500
               fontSize={14}
+              fontFamily="Geologica"
             >
               {label}
             </text>
@@ -56,11 +65,12 @@ const CustomPieChart = ({
             <text
               x="50%"
               y="50%"
-              dy={8}
+              dy={10}
               textAnchor="middle"
-              fill="#333"
-              fontSize={24}
-              fontWeight={600}
+              fill="#006d77" // Stormy-500
+              fontSize={28}
+              fontWeight={700}
+              fontFamily="Geologica"
             >
               {totalAmount}
             </text>

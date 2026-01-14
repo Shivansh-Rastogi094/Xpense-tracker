@@ -1,40 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Poppins', sans-serif;
-  --color-primary: 135 92 245;
+  --font-sans: "Geologica", sans-serif;
+
+  /* --- BRAND: Stormy Teal (Backgrounds & Text) --- */
+  --color-stormy-100: #001617;
+  --color-stormy-200: #002b2f;
+  --color-stormy-300: #004146;
+  --color-stormy-400: #00565e;
+  --color-stormy-500: #006d77;
+  --color-stormy-600: #00b4c4;
+  --color-stormy-900: #b0f8ff;
+
+  /* --- ACCENT: Royal Indigo (The "Pop" Color) --- */
+  /* Used for Buttons, Links, and High-Priority Actions */
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-500: #6366f1; /* Main Button Color */
+  --color-indigo-600: #4f46e5; /* Hover State */
+  --color-indigo-900: #312e81;
+
+  /* --- SECONDARY: Pearl Aqua (Income & Soft UI) --- */
+  --color-pearl-100: #152c2a;
+  --color-pearl-500: #2a9d8f; /* Slightly darker for better contrast */
+  --color-pearl-600: #21867a;
+
+  /* --- BASE: Alice Blue (Light Mode Canvas) --- */
+  --color-alice-500: #edf6f9;
+  --color-alice-600: #e2eafc; /* Slightly blue-er for contrast */
+
+  /* --- DANGER: Tangerine (Expenses & Alerts) --- */
+  --color-tangerine-500: #e76f51; 
+  --color-tangerine-600: #d6673f;
 }
 
-@custom-media --3xl (min-width: 1920px);
-
 @layer base {
-  html {
-    font-family: var(--font-display);
+  /* DARK MODE FIX: We bind the variables to the class selector */
+  :root {
+    --bg-main: var(--color-alice-500);
+    --text-main: var(--color-stormy-500);
+  }
+
+  :root.dark {
+    --bg-main: var(--color-stormy-100);
+    --text-main: var(--color-alice-500);
   }
 
   body {
-    background-color: #fcfbfc;
-    overflow-x: hidden;
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
   }
 }
 
-.btn-primary {
-  @apply w-full text-sm font-medium bg-primary text-white rounded-md py-2 mt-3 hover:bg-primary/90 transition shadow-lg shadow-purple-600/5;
-}
+@layer components {
+  /* PRIMARY BUTTON -> Now INDIGO (Purple-Blue) to pop against the Green/Teal */
+  .btn-primary {
+    @apply w-full text-sm font-bold bg-indigo-600 text-white rounded-xl py-3 mt-4
+    hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5
+    dark:bg-indigo-500 dark:hover:bg-indigo-400
+    transition-all duration-200 cursor-pointer;
+  }
 
-.card {
-  @apply bg-white p-6 rounded-2xl shadow-md shadow-gray-100 border border-gray-200/50;
-}
+  /* Standard Card - cleaner borders */
+  .card {
+    @apply bg-white p-6 rounded-2xl shadow-sm border border-slate-200 
+    dark:bg-stormy-200 dark:border-stormy-300 dark:shadow-none transition-colors;
+  }
 
-.card-btn {
-  @apply flex items-center gap-3 text-[12px] font-medium text-gray-700 hover:text-purple-500 bg-gray-50 hover:bg-purple-50 px-4 py-1.5 rounded-lg border border-gray-200/50 cursor-pointer;
-}
+  /* Header/Title Text */
+  .text-heading {
+    @apply text-slate-800 dark:text-white font-bold;
+  }
 
-.add-btn{
- @apply flex items-center gap-1.5 text-xs md:text-sm font-medium text-purple-600 whitespace-nowrap bg-purple-50 border border-purple-500 rounded-lg px-4 py-2 cursor-pointer;
-}
+  /* Subtext */
+  .text-sub {
+    @apply text-slate-500 dark:text-stormy-600 font-medium;
+  }
 
-.add-btn-fill{
- @apply text-white bg-primary;
+  /* Add Button (The Plus Icon) */
+  .add-btn {
+    @apply flex items-center gap-2 text-sm font-bold rounded-xl px-4 py-2 cursor-pointer transition-all
+    text-indigo-600 bg-indigo-50 border border-indigo-100
+    hover:bg-indigo-600 hover:text-white hover:shadow-md
+    dark:text-indigo-300 dark:bg-stormy-300 dark:border-stormy-400 dark:hover:bg-indigo-500 dark:hover:text-white;
+  }
+
+  /* Solid Add Button */
+  .add-btn-fill {
+    @apply text-white bg-indigo-600 hover:bg-indigo-500 dark:bg-indigo-500 border-none shadow-md shadow-indigo-500/20;
+  }
+  
+  /* Small Card Button (See More) */
+  .card-btn {
+    @apply flex items-center gap-2 text-[12px] font-bold px-3 py-1.5 rounded-lg border cursor-pointer transition-colors
+    text-indigo-600 bg-indigo-50 border-indigo-100
+    hover:bg-indigo-100 
+    dark:text-indigo-300 dark:bg-stormy-300 dark:border-stormy-400 dark:hover:text-white;
+  }
 }
