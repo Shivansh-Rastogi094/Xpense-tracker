@@ -11,7 +11,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, "dist")));
 
 // SPA fallback - send all requests to index.html
-app.get("*", (req, res) => {
+// Express 5 requires /.* instead of *
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
