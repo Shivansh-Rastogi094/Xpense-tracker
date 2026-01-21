@@ -10,9 +10,8 @@ const app = express();
 // Serve static files from the dist directory
 app.use(express.static(path.join(__dirname, "dist")));
 
-// SPA fallback - send all requests to index.html
-// Express 5 requires /.* instead of *
-app.get("/*", (req, res) => {
+// SPA fallback - use middleware instead of route for Express 5
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
