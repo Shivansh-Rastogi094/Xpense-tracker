@@ -42,7 +42,7 @@ const Infocard = ({ icon, label, value, color, onClick, showAction = false }) =>
             e.stopPropagation() // prevent card click
             onClick?.()
           }}
-          className="add-btn h-9 w-9 !p-0 flex items-center justify-center rounded-xl opacity-0 group-hover:opacity-100 transition"
+          className="add-btn h-9 w-9 !p-0 flex items-center justify-center rounded-xl opacity-100 group-hover:opacity-100 transition"
         >
           <LuPlus className="text-base" />
         </button>

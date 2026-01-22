@@ -110,7 +110,7 @@ const Home = () => {
 
           <Infocard
             icon={<LuHandCoins />}
-            label="Total Income | Tap to Add more"
+            label="Total Income"
             value={addThousandSeparators(dashboardData?.totalIncome || 0)}
             color="bg-pearl-500"
             onClick={() => setOpenAddIncomeModal(true)}
@@ -120,7 +120,7 @@ const Home = () => {
 
           <Infocard
             icon={<LuWalletMinimal />}
-            label="Total Expenses | Tap to Add more"
+            label="Total Expenses"
             value={addThousandSeparators(dashboardData?.totalExpense || 0)}
             color="bg-tangerine-500" // Action Orange
             onClick={() => setOpenAddExpenseModal(true)}
