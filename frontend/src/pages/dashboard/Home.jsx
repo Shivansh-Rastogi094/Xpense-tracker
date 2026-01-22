@@ -9,6 +9,9 @@ import Infocard from "../../components/Cards/Infocard";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { addThousandSeparators } from "../../utils/helper";
+import Modal from "../../components/Modal"
+import AddIncomeForm from "../../components/Income/AddIncomeForm";
+import AddExpenseForm from "../../components/Expense/AddExpenseForm";
 
 // Components
 import RecentTransaction from "../../components/Dashboard/RecentTransaction";
@@ -23,6 +26,42 @@ const Home = () => {
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false)
+  const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false)
+  
+
+   const handleAddIncome = async (income) => {
+    const { source, amount, date, icon } = income;
+    if (!source.trim()) return toast.error("Source is required.")
+    if (!amount || isNaN(amount) || Number(amount) <= 0) return toast.error("Valid amount required.")
+    if (!date) return toast.error("Date is required.")
+
+    try {
+      await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME, { source, amount, date, icon })
+      setOpenAddIncomeModal(false)
+      toast.success("Income added Successfully")
+      fetchIncomeDetails()
+    } catch (error) {
+      toast.error("Failed to add income")
+    }
+  }
+
+  const handleAddExpense = async (expense) => {
+    const { category, amount, date, icon } = expense;
+    if (!category.trim()) return toast.error("Category is required.")
+    if (!amount || isNaN(amount) || Number(amount) <= 0) return toast.error("Valid amount required.")
+    if (!date) return toast.error("Date is required.")
+
+    try {
+      await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, { category, amount, date, icon })
+      setOpenAddExpenseModal(false)
+      toast.success("Expense added Successfully")
+      fetchExpenseDetails()
+    } catch (error) {
+      toast.error("Failed to add expense")
+    }
+  }
+
 
   const fetchDashboardData = async () => {
     if (loading) return;
@@ -56,18 +95,36 @@ const Home = () => {
             color="bg-stormy-500" // Primary Teal
           />
 
+            <Modal
+                isOpen={openAddIncomeModal}
+                onClose={() => setOpenAddIncomeModal(false)}
+                title="Add Income"
+              >
+              <AddIncomeForm onAddIncome={handleAddIncome} />
+            </Modal>
+
+            <Modal isOpen={openAddExpenseModal} onClose={() =>        setOpenAddExpenseModal(false)} title="Add Expense">
+              <AddExpenseForm openAddExpense={handleAddExpense} />
+          </Modal> 
+
+
           <Infocard
             icon={<LuHandCoins />}
-            label="Total Income"
+            label="Total Income | Tap to Add more"
             value={addThousandSeparators(dashboardData?.totalIncome || 0)}
-            color="bg-pearl-500" // Secondary Aqua
+            color="bg-pearl-500"
+            onClick={() => setOpenAddIncomeModal(true)}
+            showAction
           />
+
 
           <Infocard
             icon={<LuWalletMinimal />}
-            label="Total Expenses"
+            label="Total Expenses | Tap to Add more"
             value={addThousandSeparators(dashboardData?.totalExpense || 0)}
             color="bg-tangerine-500" // Action Orange
+            onClick={() => setOpenAddExpenseModal(true)}
+            showAction
           />
         </div>
 
