@@ -4,7 +4,7 @@ import { UserContext } from "../../context/UserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import CharAvatar from "../Cards/CharAvatar";
 
-const SideMenu = ({ activeMenu }) => {
+const SideMenu = ({ activeMenu, isMobile = false }) => {
   const { user, clearUser } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,43 +25,20 @@ const SideMenu = ({ activeMenu }) => {
 
   return (
     <aside
-      className="
-        flex flex-col w-full h-[calc(100vh-120px)]
-        rounded-2xl border shadow-sm overflow-hidden
-        transition-colors duration-300
-        bg-white border-alice-200
-        dark:bg-stormy-200 dark:border-stormy-300
-      "
+      className={`
+        flex flex-col bg-surface/50 backdrop-blur-[32px] border-r border-white/10 shadow-2xl shadow-primary/5
+        ${isMobile ? 'h-full w-full' : 'h-screen w-64 fixed left-0 top-0 py-base z-50'}
+      `}
     >
-      {/* ===== User Profile Section ===== */}
-      <div className="flex flex-col items-center justify-center py-8 px-4 border-b border-alice-200 dark:border-stormy-300">
-        <div className="relative">
-          {user?.profileImageUrl ? (
-            <img
-              src={user.profileImageUrl || ""}
-              alt="Profile"
-              className="w-20 h-20 rounded-full object-cover border-4 border-alice-500 dark:border-stormy-300 shadow-md"
-            />
-          ) : (
-            <CharAvatar
-              fullName={user?.fullName}
-              width="w-20"
-              height="h-20"
-              style="text-2xl"
-            />
-          )}
+      {!isMobile && (
+        <div className="px-6 py-8">
+          <h1 className="font-display-lg text-[28px] font-bold text-primary leading-tight">xpense-tracker</h1>
+          <p className="text-on-surface-variant font-label-sm tracking-wider uppercase mt-1">Premium Plan</p>
         </div>
-
-        <h5 className="mt-4 text-lg font-bold text-stormy-500 dark:text-alice-500">
-          {user?.fullName || "User"}
-        </h5>
-        <p className="text-xs font-medium text-stormy-300 dark:text-pearl-600 uppercase tracking-wider">
-          Pro Member
-        </p>
-      </div>
+      )}
 
       {/* ===== Menu Items ===== */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-1">
+      <nav className="flex-1 px-2 space-y-2 mt-4 overflow-y-auto custom-scrollbar">
         {SIDE_MENU_DATA.map((item, index) => {
           const isActive = activeMenu === item.label || location.pathname === item.path;
 
@@ -70,30 +47,45 @@ const SideMenu = ({ activeMenu }) => {
               key={`menu_${index}`}
               onClick={() => handleClick(item.path)}
               className={`
-                w-full flex items-center gap-4 px-4 py-3 rounded-xl 
-                text-[15px] font-medium transition-all duration-300
+                w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-95
                 ${isActive 
-                  ? "bg-stormy-500 text-white shadow-lg shadow-stormy-500/30 dark:bg-pearl-500 dark:text-stormy-200" 
-                  : "text-stormy-400 hover:bg-alice-600 hover:text-stormy-600 dark:text-pearl-600 dark:hover:bg-stormy-300 dark:hover:text-pearl-400"
+                  ? "bg-primary-container/20 text-primary border-r-2 border-secondary" 
+                  : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest/50"
                 }
               `}
             >
               <item.icon
-                className={`text-xl shrink-0 transition-colors ${
-                  isActive ? "text-white dark:text-stormy-200" : ""
-                }`}
+                className={`text-xl shrink-0 ${isActive ? "text-primary" : ""}`}
               />
-              <span className="truncate">{item.label}</span>
+              <span className="font-body-md truncate">{item.label}</span>
             </button>
           );
         })}
-      </div>
+      </nav>
 
-      {/* ===== Footer ===== */}
-      <div className="px-6 py-4 border-t border-alice-200 dark:border-stormy-300">
-        <p className="text-xs text-center text-stormy-300 dark:text-pearl-800">
-          © {new Date().getFullYear()} Xpense Tracker
-        </p>
+      {/* ===== Footer Actions ===== */}
+      <div className="mt-auto px-6 py-6 border-t border-white/5">
+        <button 
+          onClick={() => navigate('/expense')}
+          className="w-full py-4 px-4 bg-primary text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 mb-6 hover:scale-[1.02] active:scale-95 transition-all neon-glow-primary"
+        >
+          <span className="material-symbols-outlined">add_circle</span>
+          Add Expense
+        </button>
+
+        <div className="space-y-4">
+          <button className="w-full flex items-center gap-3 text-on-surface-variant hover:text-on-surface transition-colors">
+            <span className="material-symbols-outlined text-xl">help</span>
+            <span className="font-body-md">Help Center</span>
+          </button>
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-3 text-error hover:text-tertiary transition-colors"
+          >
+            <span className="material-symbols-outlined text-xl">logout</span>
+            <span className="font-body-md">Logout</span>
+          </button>
+        </div>
       </div>
     </aside>
   );

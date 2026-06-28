@@ -1,104 +1,216 @@
-@import url('https://fonts.googleapis.com/css2?family=Geologica:wght,CRSV@100..900,0&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Geologica", sans-serif;
+  /* Colors from Obsidian Glass */
+  --color-surface: #0b1326;
+  --color-surface-dim: #0b1326;
+  --color-surface-bright: #31394d;
+  --color-surface-container-lowest: #060e20;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container: #171f33;
+  --color-surface-container-high: #222a3d;
+  --color-surface-container-highest: #2d3449;
+  --color-on-surface: #dae2fd;
+  --color-on-surface-variant: #c7c4d7;
+  --color-inverse-surface: #dae2fd;
+  --color-inverse-on-surface: #283044;
+  --color-outline: #908fa0;
+  --color-outline-variant: #464554;
+  --color-surface-tint: #c0c1ff;
+  --color-primary: #c0c1ff;
+  --color-on-primary: #1000a9;
+  --color-primary-container: #8083ff;
+  --color-on-primary-container: #0d0096;
+  --color-inverse-primary: #494bd6;
+  --color-secondary: #4edea3;
+  --color-on-secondary: #003824;
+  --color-secondary-container: #00a572;
+  --color-on-secondary-container: #00311f;
+  --color-tertiary: #ffb2b7;
+  --color-on-tertiary: #67001b;
+  --color-tertiary-container: #ff516a;
+  --color-on-tertiary-container: #5b0017;
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+  --color-primary-fixed: #e1e0ff;
+  --color-primary-fixed-dim: #c0c1ff;
+  --color-on-primary-fixed: #07006c;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-secondary-fixed: #6ffbbe;
+  --color-secondary-fixed-dim: #4edea3;
+  --color-on-secondary-fixed: #002113;
+  --color-on-secondary-fixed-variant: #005236;
+  --color-tertiary-fixed: #ffdadb;
+  --color-tertiary-fixed-dim: #ffb2b7;
+  --color-on-tertiary-fixed: #40000d;
+  --color-on-tertiary-fixed-variant: #92002a;
+  --color-background: #0b1326;
+  --color-on-background: #dae2fd;
+  --color-surface-variant: #2d3449;
 
-  /* --- BRAND: Stormy Teal (Backgrounds & Text) --- */
-  --color-stormy-100: #001617;
-  --color-stormy-200: #002b2f;
-  --color-stormy-300: #004146;
-  --color-stormy-400: #00565e;
-  --color-stormy-500: #006d77;
-  --color-stormy-600: #00b4c4;
-  --color-stormy-900: #b0f8ff;
+  /* Typography */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Outfit", sans-serif;
+  --font-display-lg: "Outfit", sans-serif;
+  --font-headline-lg: "Outfit", sans-serif;
+  --font-headline-lg-mobile: "Outfit", sans-serif;
+  --font-title-md: "Outfit", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-label-sm: "Inter", sans-serif;
 
-  /* --- ACCENT: Royal Indigo (The "Pop" Color) --- */
-  /* Used for Buttons, Links, and High-Priority Actions */
-  --color-indigo-100: #e0e7ff;
-  --color-indigo-500: #6366f1; /* Main Button Color */
-  --color-indigo-600: #4f46e5; /* Hover State */
-  --color-indigo-900: #312e81;
+  /* Font Sizes */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
 
-  /* --- SECONDARY: Pearl Aqua (Income & Soft UI) --- */
-  --color-pearl-100: #152c2a;
-  --color-pearl-500: #2a9d8f; /* Slightly darker for better contrast */
-  --color-pearl-600: #21867a;
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.01em;
 
-  /* --- BASE: Alice Blue (Light Mode Canvas) --- */
-  --color-alice-500: #edf6f9;
-  --color-alice-600: #e2eafc; /* Slightly blue-er for contrast */
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 32px;
 
-  /* --- DANGER: Tangerine (Expenses & Alerts) --- */
-  --color-tangerine-500: #e76f51; 
-  --color-tangerine-600: #d6673f;
+  --text-title-md: 20px;
+  --text-title-md--line-height: 28px;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.05em;
+
+  /* Rounded */
+  --radius-sm: 0.25rem;
+  --radius-DEFAULT: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+
+  /* Spacing */
+  --spacing-base: 8px;
+  --spacing-container-padding: 24px;
+  --spacing-gutter: 16px;
+  --spacing-card-gap: 20px;
+  --spacing-section-margin: 48px;
 }
 
 @layer base {
-  /* DARK MODE FIX: We bind the variables to the class selector */
-  :root {
-    --bg-main: var(--color-alice-500);
-    --text-main: var(--color-stormy-500);
-  }
-
-  :root.dark {
-    --bg-main: var(--color-stormy-100);
-    --text-main: var(--color-alice-500);
-  }
-
   body {
-    font-family: var(--font-sans);
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
+    background-color: var(--color-background);
+    color: var(--color-on-surface);
   }
 }
 
 @layer components {
-  /* PRIMARY BUTTON -> Now INDIGO (Purple-Blue) to pop against the Green/Teal */
-  .btn-primary {
-    @apply w-full text-sm font-bold bg-indigo-600 text-white rounded-xl py-3 mt-4
-    hover:bg-indigo-500 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5
-    dark:bg-indigo-500 dark:hover:bg-indigo-400
-    transition-all duration-200 cursor-pointer;
-  }
-
-  /* Standard Card - cleaner borders */
-  .card {
-    @apply bg-white p-6 rounded-2xl shadow-sm border border-slate-200 
-    dark:bg-stormy-200 dark:border-stormy-300 dark:shadow-none transition-colors;
-  }
-
-  /* Header/Title Text */
-  .text-heading {
-    @apply text-slate-800 dark:text-white font-bold;
-  }
-
-  /* Subtext */
-  .text-sub {
-    @apply text-slate-500 dark:text-stormy-600 font-medium;
-  }
-
-  /* Add Button (The Plus Icon) */
-  .add-btn {
-    @apply flex items-center gap-2 text-sm font-bold rounded-xl px-4 py-2 cursor-pointer transition-all
-    text-indigo-600 bg-indigo-50 border border-indigo-100
-    hover:bg-indigo-600 hover:text-white hover:shadow-md
-    dark:text-indigo-300 dark:bg-stormy-300 dark:border-stormy-400 dark:hover:bg-indigo-500 dark:hover:text-white;
-  }
-
-  /* Solid Add Button */
-  .add-btn-fill {
-    @apply text-white bg-indigo-600 hover:bg-indigo-500 dark:bg-indigo-500 border-none shadow-md shadow-indigo-500/20;
+  /* Obsidian Glass UI Components */
+  
+  .glass-card {
+    background: rgba(30, 41, 59, 0.5);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  /* Small Card Button (See More) */
-  .card-btn {
-    @apply flex items-center gap-2 text-[12px] font-bold px-3 py-1.5 rounded-lg border cursor-pointer transition-colors
-    text-indigo-600 bg-indigo-50 border-indigo-100
-    hover:bg-indigo-100 
-    dark:text-indigo-300 dark:bg-stormy-300 dark:border-stormy-400 dark:hover:text-white;
+  .glass-modal {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .input-glass {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .input-glass:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px rgba(192, 193, 255, 0.4);
+    outline: none;
+  }
+
+  .neon-glow-primary:hover {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    transform: scale(1.02);
+  }
+  
+  .neon-glow-secondary:hover {
+    box-shadow: 0 0 20px rgba(78, 222, 163, 0.2);
+    transform: scale(1.02);
+  }
+
+  .neon-glow-error:hover {
+    box-shadow: 0 0 20px rgba(255, 81, 106, 0.2);
+    transform: scale(1.02);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.3);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(192, 193, 255, 0.2);
+    border-radius: 10px;
+  }
+
+  @keyframes lightSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .sweep-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sweep-effect::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transform: translateX(-100%);
+  }
+  
+  .sweep-effect:hover::after {
+    animation: lightSweep 1s forwards;
+  }
+  
+  /* Additional Sweep for Login/Register (Diagonal) */
+  @keyframes sweepDiagonal {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .sweep-effect-diagonal {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sweep-effect-diagonal::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+    transform: skewX(-25deg) translateX(-200%);
+    animation: sweepDiagonal 6s infinite;
   }
 }

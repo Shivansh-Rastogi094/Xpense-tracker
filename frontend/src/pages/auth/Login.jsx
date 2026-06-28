@@ -51,21 +51,15 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
-        <h3 className="text-2xl font-bold text-stormy-500 dark:text-alice-500">
-            Welcome Back
-        </h3>
-        <p className="text-sm text-stormy-300 dark:text-pearl-600 mt-2 mb-8 font-medium">
-          Please enter your details to login
-        </p>
-
-        <form onSubmit={handleLogin}>
+      <div className="glass-card rounded-2xl p-8 sweep-effect shadow-2xl">
+        <form onSubmit={handleLogin} className="space-y-6">
           <Input
             value={email}
             onChange={({ target }) => setEmail(target.value)}
             label="Email Address"
             type="email"
-            placeholder="john@example.com"
+            placeholder="name@company.com"
+            icon="mail"
           />
 
           <Input
@@ -74,24 +68,31 @@ const Login = () => {
             label="Password"
             type="password"
             placeholder="••••••••"
+            icon="lock"
           />
 
-          {error && <p className='text-tangerine-500 text-xs pb-2.5 font-medium'>{error}</p>}
+          {error && <p className='text-error text-label-sm font-medium'>{error}</p>}
 
           <button
             type="submit"
-            className="btn-primary"
+            className="w-full bg-primary text-on-primary font-title-md text-title-md py-4 rounded-xl neon-glow-primary transition-all active:scale-95 shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
           >
             Login
+            <span className="material-symbols-outlined">login</span>
           </button>
+        </form>
 
-          <p className='text-[13px] text-stormy-400 dark:text-pearl-600 mt-4 text-center'>
+        <div className="mt-8 text-center space-y-4">
+          <p className="text-on-surface-variant font-body-md">
             Don't have an account?{' '}
-            <Link className='font-bold text-stormy-500 hover:text-stormy-700 dark:text-alice-500 dark:hover:text-pearl-400 underline transition-colors' to='/SignUp'>
+            <Link 
+              className='text-primary font-bold hover:text-primary-container transition-colors ml-1' 
+              to='/SignUp'
+            >
                 Sign Up
             </Link>
           </p>
-        </form>
+        </div>
       </div>
     </AuthLayout>
   );

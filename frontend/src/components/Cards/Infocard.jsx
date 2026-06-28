@@ -1,52 +1,38 @@
 import React from 'react'
-import { LuPlus } from 'react-icons/lu'
 
 const Infocard = ({ icon, label, value, color, onClick, showAction = false }) => {
   return (
     <div
       onClick={onClick}
       className={`
-        group flex items-center justify-between gap-5 p-6 rounded-2xl border transition-all duration-300
-        bg-white border-alice-200 shadow-sm hover:shadow-lg hover:-translate-y-1
-        dark:bg-stormy-300 dark:border-stormy-400 dark:shadow-none
-        ${onClick ? 'cursor-pointer' : ''}
+        glass-card rounded-2xl p-6 transition-all duration-300 hover:scale-[1.02]
+        ${onClick ? 'cursor-pointer hover:shadow-xl' : ''}
+        sweep-effect overflow-hidden
       `}
     >
-      {/* Left side */}
-      <div className="flex items-center gap-5">
-        {/* Icon */}
-        <div
-          className={`
-            w-14 h-14 flex items-center justify-center text-[26px] rounded-2xl shadow-md transition-transform group-hover:scale-110
-            text-white ${color}
-          `}
-        >
-          {icon}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl bg-surface-container-highest shadow-inner ${color}`}>
+            {icon}
+          </div>
+          <div>
+            <p className="font-label-sm text-on-surface-variant uppercase tracking-wider">{label}</p>
+            <h3 className="font-display-lg text-headline-lg font-bold text-on-surface mt-1">₹{value}</h3>
+          </div>
         </div>
 
-        {/* Text */}
-        <div>
-          <h6 className="text-sm font-medium text-stormy-300 dark:text-pearl-600 mb-1">
-            {label}
-          </h6>
-          <span className="text-2xl font-bold text-stormy-500 dark:text-alice-500 font-sans">
-            ₹{value}
-          </span>
-        </div>
+        {showAction && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              onClick?.()
+            }}
+            className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all neon-glow-primary"
+          >
+            <span className="material-symbols-outlined">add</span>
+          </button>
+        )}
       </div>
-
-      {/* Optional action button */}
-      {showAction && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation() // prevent card click
-            onClick?.()
-          }}
-          className="add-btn h-9 w-9 !p-0 flex items-center justify-center rounded-xl opacity-100 group-hover:opacity-100 transition"
-        >
-          <LuPlus className="text-base" />
-        </button>
-      )}
     </div>
   )
 }

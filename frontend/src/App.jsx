@@ -14,6 +14,7 @@ import Expense from "./pages/dashboard/Expense";
 import { Toaster } from "react-hot-toast";
 
 import UserProvider from "./context/UserContext";
+import BackgroundShader from "./components/BackgroundShader";
 
 const Root = () => {
   const isAuthenticated = !!localStorage.getItem("token");
@@ -27,7 +28,8 @@ const Root = () => {
 const App = () => {
   return (
     <UserProvider>
-      <div>
+      <BackgroundShader />
+      <div className="relative z-10">
         <Router>
           <Routes>
             <Route path="/" element={<Root />} />
@@ -43,8 +45,7 @@ const App = () => {
       {/* THEMED TOASTER */}
       <Toaster
         toastOptions={{
-          // This applies the Stormy/Alice palette to notifications
-          className: 'bg-white text-stormy-500 shadow-xl border border-alice-200 dark:bg-stormy-300 dark:text-pearl-500 dark:border-stormy-400 font-medium',
+          className: 'glass-modal text-on-surface font-medium border border-white/10 shadow-2xl',
           style: {
             fontSize: "14px",
             borderRadius: "12px",
@@ -52,14 +53,14 @@ const App = () => {
           },
           success: {
             iconTheme: {
-              primary: '#006d77', // Stormy Teal
-              secondary: 'white',
+              primary: 'var(--color-secondary)', 
+              secondary: 'var(--color-surface)',
             },
           },
           error: {
             iconTheme: {
-              primary: '#e29578', // Tangerine
-              secondary: 'white',
+              primary: 'var(--color-error)', 
+              secondary: 'var(--color-surface)',
             },
           },
         }}

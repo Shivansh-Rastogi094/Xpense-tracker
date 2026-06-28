@@ -1,57 +1,43 @@
 import React, { useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 
-const Input = ({ value, placeholder, onChange, label, type }) => {
+const Input = ({ value, placeholder, onChange, label, type, icon }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   return (
-    <div className="mb-4">
+    <div className="space-y-2 mb-4">
       {/* Label */}
-      <label className="text-[13px] font-medium block mb-1 text-stormy-500 dark:text-pearl-600">
+      <label className={`font-label-sm text-label-sm uppercase flex items-center gap-2 transition-colors ${isFocused ? 'text-primary' : 'text-on-surface-variant'}`}>
+        {icon && <span className="material-symbols-outlined text-[18px]">{icon}</span>}
         {label}
       </label>
 
       {/* Input Container */}
-      <div className="
-        flex items-center px-3 py-2.5 rounded-xl border transition-all duration-200
-        bg-alice-500 border-alice-200 
-        focus-within:border-stormy-500 focus-within:ring-1 focus-within:ring-stormy-500
-        dark:bg-stormy-300 dark:border-stormy-400
-        dark:focus-within:border-pearl-500 dark:focus-within:ring-pearl-500
-      ">
+      <div className="relative flex items-center">
         <input
           type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
           placeholder={placeholder}
-          className="
-            w-full bg-transparent outline-none text-sm font-medium
-            text-stormy-500 placeholder:text-stormy-300
-            dark:text-alice-500 dark:placeholder:text-stormy-400
-          "
+          className="input-glass w-full rounded-xl px-4 py-3 text-on-surface placeholder:text-outline/50 font-body-md text-body-md pr-10"
           value={value}
           onChange={(e) => onChange(e)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
 
         {/* Password Toggle Icon */}
         {type === 'password' && (
-          <>
+          <div className="absolute right-3 flex items-center cursor-pointer text-on-surface-variant hover:text-primary transition-colors">
             {showPassword ? (
-              <FaRegEye
-                size={20}
-                className="text-stormy-500 dark:text-pearl-500 cursor-pointer hover:scale-110 transition-transform"
-                onClick={toggleShowPassword}
-              />
+              <FaRegEye size={18} onClick={toggleShowPassword} />
             ) : (
-              <FaRegEyeSlash
-                size={20}
-                className="text-stormy-300 dark:text-stormy-400 cursor-pointer hover:text-stormy-500 transition-colors"
-                onClick={toggleShowPassword}
-              />
+              <FaRegEyeSlash size={18} onClick={toggleShowPassword} />
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

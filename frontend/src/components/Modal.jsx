@@ -18,7 +18,7 @@ const Modal = ({ children, isOpen, onClose, title }) => {
                     
                     {/* Header */}
                     <div className='flex items-center justify-between p-4 md:p-5 border-b border-alice-200 dark:border-stormy-300'>
-                        <h3 className='text-lg font-bold text-stormy-500 dark:text-alice-500'>
+                        <h3 className='font-title-md text-title-md font-bold text-stormy-500 dark:text-alice-500'>
                             {title}
                         </h3>
                         
@@ -26,7 +26,7 @@ const Modal = ({ children, isOpen, onClose, title }) => {
                             type='button'
                             onClick={onClose}
                             className='
-                                p-2 rounded-lg transition-colors
+                                p-2 rounded-xl transition-colors
                                 text-stormy-300 hover:bg-alice-600 hover:text-tangerine-500
                                 dark:text-pearl-600 dark:hover:bg-stormy-300 dark:hover:text-tangerine-500
                             '

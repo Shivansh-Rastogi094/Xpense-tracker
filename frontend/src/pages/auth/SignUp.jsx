@@ -77,63 +77,63 @@ const SignUp = () => {
 
   return (
     <AuthLayout>
-      <div className="lg:w-[100%] h-auto md:h-full mt-10 md:mt-0 flex flex-col justify-center">
-        <h3 className="text-2xl font-bold text-stormy-500 dark:text-alice-500">
-            Create an Account
-        </h3>
-        <p className="text-sm text-stormy-300 dark:text-pearl-600 mb-8 font-medium mt-2">
-          Join us today by entering your details below
-        </p>
-
-        <form onSubmit={handleSignUp}>
-          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              value={fullName}
-              onChange={({ target }) => setFullName(target.value)}
-              label="Full Name"
-              type="text"
-              placeholder="John Doe"
-            />
-
-            <Input
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-              label="Email Address"
-              type="email"
-              placeholder="john@example.com"
-            />
-
-            <div className="col-span-1 md:col-span-2">
-              <Input
-                value={password}
-                onChange={({ target }) => setPassword(target.value)}
-                label="Password"
-                type="password"
-                placeholder="••••••••"
-              />
-            </div>
+      <div className="glass-card rounded-2xl p-8 sweep-effect shadow-2xl">
+        <form onSubmit={handleSignUp} className="space-y-6">
+          <div className="flex justify-center mb-6">
+            <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
           </div>
 
+          <Input
+            value={fullName}
+            onChange={({ target }) => setFullName(target.value)}
+            label="Full Name"
+            type="text"
+            placeholder="Johnathan Doe"
+            icon="person"
+          />
+
+          <Input
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+            label="Email Address"
+            type="email"
+            placeholder="name@company.com"
+            icon="mail"
+          />
+
+          <Input
+            value={password}
+            onChange={({ target }) => setPassword(target.value)}
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            icon="lock"
+          />
+
           {error && (
-            <p className="text-tangerine-500 text-xs pb-2.5 font-medium">{error}</p>
+            <p className="text-error text-label-sm font-medium">{error}</p>
           )}
 
-          <button type="submit" className="btn-primary">
-            Sign Up
+          <button 
+            type="submit" 
+            className="w-full bg-primary text-on-primary font-title-md text-title-md py-4 rounded-xl neon-glow-primary transition-all active:scale-95 shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
+          >
+            Create Account
+            <span className="material-symbols-outlined">arrow_forward</span>
           </button>
+        </form>
 
-          <p className="text-[13px] text-stormy-400 dark:text-pearl-600 mt-4 text-center">
-            Already have an account?{" "}
+        <div className="mt-8 text-center space-y-4">
+          <p className="text-on-surface-variant font-body-md">
+            Already have an account? 
             <Link
-              className="font-bold text-stormy-500 hover:text-stormy-700 dark:text-alice-500 dark:hover:text-pearl-400 underline transition-colors"
+              className="text-primary font-bold hover:text-primary-container transition-colors ml-1"
               to="/Login"
             >
-              Sign In
+              Back to Login
             </Link>
           </p>
-        </form>
+        </div>
       </div>
     </AuthLayout>
   );

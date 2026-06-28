@@ -4,7 +4,7 @@ import { useUserAuth } from "../../hooks/UseUserAuth";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPath";
-import Infocard from "../../components/Cards/Infocard";
+import InfoCard from "../../components/Cards/InfoCard";
 
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
@@ -88,11 +88,11 @@ const Home = () => {
         
         {/* 1. TOP STATS CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Infocard
-            icon={<IoMdCard />}
+          <InfoCard
+            icon={<span className="material-symbols-outlined text-3xl">account_balance_wallet</span>}
             label="Total Balance"
             value={addThousandSeparators(dashboardData?.totalBalance || 0)}
-            color="bg-stormy-500" // Primary Teal
+            color="text-primary"
           />
 
             <Modal
@@ -108,21 +108,21 @@ const Home = () => {
           </Modal> 
 
 
-          <Infocard
-            icon={<LuHandCoins />}
+          <InfoCard
+            icon={<span className="material-symbols-outlined text-3xl">payments</span>}
             label="Total Income"
             value={addThousandSeparators(dashboardData?.totalIncome || 0)}
-            color="bg-pearl-500"
+            color="text-secondary"
             onClick={() => setOpenAddIncomeModal(true)}
             showAction
           />
 
 
-          <Infocard
-            icon={<LuWalletMinimal />}
+          <InfoCard
+            icon={<span className="material-symbols-outlined text-3xl">credit_card</span>}
             label="Total Expenses"
             value={addThousandSeparators(dashboardData?.totalExpense || 0)}
-            color="bg-tangerine-500" // Action Orange
+            color="text-error"
             onClick={() => setOpenAddExpenseModal(true)}
             showAction
           />
